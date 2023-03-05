@@ -7,7 +7,7 @@ public class Boss_walk : StateMachineBehaviour
     Transform player;
     Rigidbody2D rb;
     public float speed = 2.5f;
-   //  public float attackrange = 0.3f;
+    
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,7 +17,8 @@ public class Boss_walk : StateMachineBehaviour
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {  
+    { 
+      
       if(Vector2.Distance(player.position,rb.position) >= 2.7)
       {
          Vector2 target = new Vector2(player.position.x,player.position.y);
@@ -28,14 +29,6 @@ public class Boss_walk : StateMachineBehaviour
       {
          animator.SetTrigger("Smash");
       }
-      //  Debug.Log(Vector2.Distance(player.position,rb.position));
-      //  Debug.Log(attackrange);
-
-      //  if(Vector2.Distance(player.position,rb.position) <= attackrange)
-      //  {
-      //    animator.SetTrigger("Attack");
-      //    Debug.Log("Attack!");
-      //  }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

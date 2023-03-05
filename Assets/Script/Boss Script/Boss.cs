@@ -8,6 +8,10 @@ public class Boss : MonoBehaviour
     public bool isFlipped = false;
     public static Boss instance;
     public Animator animator;
+
+    public float HP = 100f;
+    
+    public GameObject blade;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,22 @@ public class Boss : MonoBehaviour
             isFlipped = true;
         }
     }
+    public void TakeDamage(int damage)
+    {
+        HP -= damage;
+        if(HP <= 0)
+        {
+            animator.Play("Boss_death");
+        }
+        StartCoroutine(VisualIndicator(Color.gray));
+    }
+
+    private IEnumerator VisualIndicator(Color color)
+    {
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.15f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
     
      private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,7 +65,5 @@ public class Boss : MonoBehaviour
         {
              animator.SetTrigger("Attack");
         }
-    }
-
-   
+    }   
 }

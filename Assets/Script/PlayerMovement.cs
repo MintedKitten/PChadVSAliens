@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int HP =100;
     public float movespeed = 5f;
     private Rigidbody2D rb;
     private bool facing_right = true;
@@ -12,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public float attackrange = 0.5f;
     public LayerMask enemyLayers;
     private bool is_moving = false;
+    private bool isFlash = false;
     private Animator animator;
-    
 
+    public int attack_damage = 20;
+    
     Vector2 movement;
     void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -69,13 +73,51 @@ public class PlayerMovement : MonoBehaviour
 
     void Attack()
     {   
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && !isFlash) 
         {   
             animator.SetTrigger("Attack");
-
-            // Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position,attackrange,enemyLayers);
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position,attackrange,enemyLayers);
+            Debug.Log(hitEnemies);
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                if(enemy.name == "Boss")
+                {
+                    enemy.GetComponent<Boss>().TakeDamage(attack_damage);
+                }
+                // else
+                // {
+                //     enemy.GetComponent<>().TakeDamage();
+                // }
+            }
         }
     }
+    public void TakeDamage(int damage)
+    {
+        if(!isFlash)
+        {
+            HP -= damage;
+            if(HP<=0)
+            {
+                Debug.Log("Player DIE!");
+            }
+        isFlash = true;
+        StartCoroutine(flash());
+        }
+        
+        
+    }
+    IEnumerator flash()
+    {
+        for(int i = 0; i< 10; i++)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+            yield return new WaitForSeconds(0.1f);
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(0.1f);
+        }
+        isFlash = false;
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
