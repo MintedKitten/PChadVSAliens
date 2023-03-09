@@ -66,4 +66,16 @@ public class Boss : MonoBehaviour
              animator.SetTrigger("Attack");
         }
     }   
+    public void Death_Sound()
+    {
+        AudioManager.instance.PLayBossDeath();
+    }
+    public void Attack_Sound()
+    {
+        AudioManager.instance.PLayBossAttack();
+    }
+    public void Slam_Sound()
+    {
+        AudioManager.instance.PlayBossSlam();
+    }
 }

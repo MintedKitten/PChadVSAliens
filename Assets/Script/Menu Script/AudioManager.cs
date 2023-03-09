@@ -6,6 +6,10 @@ public class AudioManager : MonoBehaviour
 {
     public AudioClip click;
     public AudioClip clothrip;
+    public AudioClip BossDeath;
+    public AudioClip BossAttack;
+    public AudioClip BossSlam;
+    public AudioClip PlayerAttack;
     public static AudioManager instance; 
     private AudioSource audiosource;
     private void Awake()
@@ -25,5 +29,21 @@ public class AudioManager : MonoBehaviour
     public void PlayClothRip()
     {
         PlaySound(clothrip);
+    }
+    public void PLayBossDeath()
+    {
+        PlaySound(BossDeath);
+    }
+        public void PLayBossAttack()
+    {
+        PlaySound(BossAttack);
+    }
+    public void PlayBossSlam()
+    {
+        PlaySound(BossSlam);
+    }
+    public void Playplayerattack()
+    {
+        PlaySound(PlayerAttack);
     }
 }

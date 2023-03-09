@@ -117,6 +117,10 @@ public class PlayerMovement : MonoBehaviour
         }
         isFlash = false;
     }
+    public void PlayAttackSound()
+    {
+        AudioManager.instance.Playplayerattack();
+    }
 
     void OnDrawGizmosSelected()
     {
