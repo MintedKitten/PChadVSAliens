@@ -17,11 +17,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
 
     public int attack_damage = 20;
+
+    public static PlayerMovement instance;
     
     Vector2 movement;
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
-        
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -121,7 +126,13 @@ public class PlayerMovement : MonoBehaviour
     {
         AudioManager.instance.Playplayerattack();
     }
-
+       public void AddHP()
+    {
+        if(HP<=90)
+        {
+        HP = HP + 10;
+        }
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
