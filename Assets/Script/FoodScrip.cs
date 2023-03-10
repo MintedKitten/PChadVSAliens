@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class FoodScrip : MonoBehaviour
 {
-private void OnTriggerEnter2D(Collider2D collider)
-{
-    if(collision.CompareTag("Player"))
+    public int hp_gain = 10;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerMovement.instance.AddHP;
-        Destroy(gameObject);
+        if (collision.CompareTag("Player"))
+        {
+            PlayerMovement.instance.AddHP(hp_gain);
+            gameObject.SetActive(false);
+        }
     }
-}
 }
 
 

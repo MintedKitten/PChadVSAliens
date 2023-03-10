@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
-    public int HP =100;
+{   
+    public int max_hp = 100;
+    public int HP;
     public float movespeed = 5f;
     private Rigidbody2D rb;
     private bool facing_right = true;
@@ -28,7 +29,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        healthbar.SetMaxHealth(HP);
+        healthbar.SetMaxHealth(max_hp);
+        HP = max_hp;
     }
 
     // Update is called once per frame
@@ -126,11 +128,13 @@ public class PlayerMovement : MonoBehaviour
     {
         AudioManager.instance.Playplayerattack();
     }
-       public void AddHP()
+       public void AddHP(int hp_gain)
     {
-        if(HP<=90)
-        {
-        HP = HP + 10;
+        if(HP<=max_hp)
+        {   
+
+            HP += hp_gain;
+            healthbar.SetHealth(HP);
         }
     }
     void OnDrawGizmosSelected()
