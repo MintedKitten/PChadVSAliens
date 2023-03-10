@@ -11,7 +11,6 @@ public class Boss : MonoBehaviour
 
     public float HP = 100f;
     
-    public GameObject blade;
     // Start is called before the first frame update
     void Start()
     {

@@ -27,7 +27,7 @@ public class BossAttack : MonoBehaviour
 		Collider2D colInfo = Physics2D.OverlapCircle(pos, blade_range, attackMask);
 		if (colInfo != null)
 		{
-			colInfo.GetComponent<PlayerMovement>().TakeDamage(blade_dmg);
+			PlayerMovement.instance.TakeDamage(blade_dmg);
 		}
 	}
 
@@ -37,11 +37,10 @@ public class BossAttack : MonoBehaviour
         pos2 += transform.right * smashOffset.x;
 		pos2 += transform.up * smashOffset.y;
 
-
 		Collider2D colInfo = Physics2D.OverlapCircle(pos2, smash_range, attackMask);
 		if (colInfo != null)
 		{
-			colInfo.GetComponent<PlayerMovement>().TakeDamage(smash_dmg);
+			PlayerMovement.instance.TakeDamage(smash_dmg);
 		}
 	}
 
