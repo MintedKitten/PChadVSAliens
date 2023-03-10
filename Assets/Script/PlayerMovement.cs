@@ -90,10 +90,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     enemy.GetComponent<Boss>().TakeDamage(attack_damage);
                 }
-                // else
-                // {
-                //     enemy.GetComponent<>().TakeDamage();
-                // }
+                else
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(attack_damage);
+                }
             }
         }
     }
