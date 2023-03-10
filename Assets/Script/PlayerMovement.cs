@@ -15,10 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private bool is_moving = false;
     private bool isFlash = false;
     private Animator animator;
-
-    public int attack_damage = 20;
-
+    public PlayerHealthbar healthbar;
     public static PlayerMovement instance;
+    public int attack_damage = 20;
     
     Vector2 movement;
     void Awake()
@@ -29,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        healthbar.SetMaxHealth(HP);
     }
 
     // Update is called once per frame
@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
         {   
             animator.SetTrigger("Attack");
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackpoint.position,attackrange,enemyLayers);
-            Debug.Log(hitEnemies);
             foreach(Collider2D enemy in hitEnemies)
             {
                 if(enemy.name == "Boss")
@@ -101,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         if(!isFlash)
         {
             HP -= damage;
+            healthbar.SetHealth(HP);
             if(HP<=0)
             {
                 Debug.Log("Player DIE!");
