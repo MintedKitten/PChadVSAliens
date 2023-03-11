@@ -6,6 +6,8 @@ public class Boss : MonoBehaviour
 {
     public Transform player;
     public bool isFlipped = false;
+
+    public bool is_dead = false;
     public static Boss instance;
     public Animator animator;
 
@@ -45,7 +47,8 @@ public class Boss : MonoBehaviour
     {
         HP -= damage;
         if(HP <= 0)
-        {
+        {   
+            is_dead = true;
             animator.Play("Boss_death");
         }
         StartCoroutine(VisualIndicator(Color.gray));
